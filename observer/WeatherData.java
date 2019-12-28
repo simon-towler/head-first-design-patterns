@@ -1,7 +1,31 @@
-//initial misguided approach
+// WeatherData now implements the Subject interface
+public class WeatherData implements Subject {
+  //We've added a List to hold the observers
+  private List<Observer> observers;
+  private float temperature;
+  private float humidity;
+  private float pressure;
 
-public class WeatherData {
-  //TODO instance variable declarations
+  //initialise the List of Observers in the constructor
+  public WeatherData() {
+    observers = new ArrayList<Observer>();
+  }
+
+  //implement the Subject interface
+  public void registerObserver(Observer o) {
+    observers.add(o);
+  }
+  public void removeObserver(Observer o) {
+    int i = observers.indexOf(o);
+    if (i >= 0) {
+      observers.remove(i);
+    }
+  }
+  public void notifyObservers() {
+    for (Observer observer : observers) {
+      observer.update(temperature, humidity, pressure);
+    }
+  }
 
   /*
    * This method gets called
@@ -9,26 +33,17 @@ public class WeatherData {
    * have been updated
    */
   public void measurementsChanged() {
-    // Your code goes here
-
-    /*
-     * Grab the most recent measurements
-     * by calling the WeatherData's gettter
-     * methods (already implemented)
-     */
-    float temp = getTemperature();
-    float humidity = getHumidity();
-    float pressure = getPressure();
-
-    /*
-     * Now update the displays...
-     * Call each display element to update its display,
-     * passing it the most recent measurements.
-     */
-    currentConditionsDisplay.update(temp, humidity, pressure);
-    statisticsDisplay.update(temp, humidity, pressure);
-    forecastDisplay.update(temp, humidity, pressure);
+    notifyObservers();
   }
 
-  // other WeatherData methods here
+  /*
+   * Use this method to simulate new data coming from a weather station
+   * to test our display elements
+   */
+  public void setMeasurements(float temperature, float humidity, float pressure) {
+    this.temperature = temperature;
+    this.humidity = humidity;
+    this.pressure = pressure;
+    measurementsChanged();
+  }
 }
