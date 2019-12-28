@@ -1,3 +1,5 @@
+import java.util.*;
+
 // WeatherData now implements the Subject interface
 public class WeatherData implements Subject {
   //We've added a List to hold the observers

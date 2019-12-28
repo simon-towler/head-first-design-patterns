@@ -6,7 +6,7 @@ public interface Subject {
    */
   public void registerObserver(Observer o);
   public void removeObserver(Observer o);
-  
+
   /*
    * This method is called to notify all observers
    * when the Subject's state has changed
