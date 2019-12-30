@@ -6,6 +6,7 @@
 public class CurrentConditionsDisplay implements Observer, DisplayElement {
   private float temperature;
   private float humidity;
+  //store a ref to the Subject to facilitate un-registering from it
   private Subject weatherData;
 
   /*
@@ -24,6 +25,7 @@ public class CurrentConditionsDisplay implements Observer, DisplayElement {
   public void update(float temperature, float humidity, float pressure) {
     this.temperature = temperature;
     this.humidity = humidity;
+    //in this simple example, on update() simply call display()
     display();
   }
 
