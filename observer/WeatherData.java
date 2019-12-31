@@ -1,32 +1,15 @@
 import java.util.*;
 
-// WeatherData now implements the Subject interface
-public class WeatherData implements Subject {
+// WeatherData now extends Observable
+public class WeatherData extends Observable {
   //We've added a List to hold the observers
-  private List<Observer> observers;
   private float temperature;
   private float humidity;
   private float pressure;
 
   //initialise the List of Observers in the constructor
   public WeatherData() {
-    observers = new ArrayList<Observer>();
-  }
-
-  //implement the Subject interface
-  public void registerObserver(Observer o) {
-    observers.add(o);
-  }
-  public void removeObserver(Observer o) {
-    int i = observers.indexOf(o);
-    if (i >= 0) {
-      observers.remove(i);
-    }
-  }
-  public void notifyObservers() {
-    for (Observer observer : observers) {
-      observer.update(temperature, humidity, pressure);
-    }
+    //constructor no longer needs to create a data structure to hold observers
   }
 
   /*
@@ -35,6 +18,7 @@ public class WeatherData implements Subject {
    * have been updated
    */
   public void measurementsChanged() {
+    setChanged();
     notifyObservers();
   }
 
@@ -48,4 +32,18 @@ public class WeatherData implements Subject {
     this.pressure = pressure;
     measurementsChanged();
   }
+
+  /*
+   * Because we are going to use "Pull" the observers will use these methods
+   * to get at the WeatherData object's state
+   */
+   public float getTemperature() {
+     return temperature;
+   }
+   public float getHumidity() {
+     return humidity;
+   }
+   public float getPressure() {
+     return pressure;
+   }
 }
