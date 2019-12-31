@@ -1,32 +1,38 @@
 /*
  * One of several Displays.
- * Implements Observer to get changes from WeatherData
+ * Extends Observable to get changes from WeatherData
  * Implements DisplayElement because our API requires all displays to
  */
+import java.util.Observable;
+import java.util.Observer;
+
 public class CurrentConditionsDisplay implements Observer, DisplayElement {
   private float temperature;
   private float humidity;
   //store a ref to the Subject to facilitate un-registering from it
-  private Subject weatherData;
+  Observable observable;
 
   /*
-   * Constructor is passed the weatherData object (the Subject)
-   * and we use it to register the display as an observer
+   * Our constructor now takes an Observable
+   * and we use this to add the current conditions object as an Observer
    */
-  public CurrentConditionsDisplay(Subject weatherData) {
-    this.weatherData = weatherData;
-    weatherData.registerObserver(this);
+  public CurrentConditionsDisplay(Observable observable) {
+    this.observable = observable;
+    observable.addObserver(this);
   }
 
   /*
    * When update() is called we first save the temp and humidity,
    * then call display()
    */
-  public void update(float temperature, float humidity, float pressure) {
-    this.temperature = temperature;
-    this.humidity = humidity;
-    //in this simple example, on update() simply call display()
-    display();
+  public void update(Observable obs, Object arg) {
+    if (obs instanceof WeatherData) {
+      WeatherData weatherData = (WeatherData)obs;
+      this.temperature = weatherData.getTemperature();
+      this.humidity = weatherData.getHumidity();
+      //in this simple example, on update() simply call display()
+      display();
+    }
   }
 
   public void display() {
