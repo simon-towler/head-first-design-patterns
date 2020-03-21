@@ -1,24 +1,21 @@
-Pizza orderPizza(String type) {
-  Pizza pizza;
+public class PizzaStore {
+  SimplePizzaFactory factory;//will be passed in from constructor
 
-/*
- * Based on the type of pizza, we instantiate the appropriate concrete class
- * and assign it to the pizza instance variable.
- * Note that eah pizza has to implement the Pizza interface
-*/
-  if(type.equals("cheese")){
-    pizza = new CheesePizza();
-  } else if (type.equals("clam")) {
-    pizza = new ClamPizza();
-  } else if (type.equals("pepperoni")){
-    pizza = new PepperoniPizza();
-  } else if (type.equals("veggie")){
-    pizza = new VeggiePizza();
-  }//TODO check for unrecognised type
+  //constructor
+  public PizzaStore(SimplePizzaFactory factory) {
+    this.factory = factory;
+  }
 
-  pizza.prepare();
-  pizz.bake();
-  pizza.cut();
-  pizza.box();
-  return pizza;
+  Pizza orderPizza(String type) {
+    Pizza pizza;
+
+  pizza = factory.createPizza(type);
+
+    pizza.prepare();
+    pizz.bake();
+    pizza.cut();
+    pizza.box();
+    return pizza;
+  }
+//other methods here
 }
