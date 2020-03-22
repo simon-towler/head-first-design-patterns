@@ -1,4 +1,5 @@
 public class PizzaStore {
+  private static final String CLASS_NAME = "PizzaStore";
   SimplePizzaFactory factory;//will be passed in from constructor
 
   //constructor
@@ -16,7 +17,7 @@ public class PizzaStore {
 if (null != factory) {
   pizza = factory.createPizza(type);
   } else {
-    System.out.println("No factory to make pizza!");
+    System.out.println(CLASS_NAME + ": No factory to make pizza!");
     pizza = null;
   }
 
@@ -26,7 +27,7 @@ if (null != factory) {
     pizza.cut();
     pizza.box();
   } else {
-    System.out.println("pizza was null!");
+    System.out.println(CLASS_NAME + ": Factory gave us a null pizza!");
   }
     return pizza;
   }
