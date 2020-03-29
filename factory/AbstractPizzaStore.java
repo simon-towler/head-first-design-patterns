@@ -1,5 +1,5 @@
-public abstract class PizzaStore {
-  private static final String CLASS_NAME = "Abstract PizzaStore";
+public abstract class AbstractPizzaStore {
+  private static final String CLASS_NAME = "AbstractPizzaStore";
   SimplePizzaFactory factory;//will be passed in from constructor
 
   //constructor
@@ -9,10 +9,11 @@ public abstract class PizzaStore {
     System.out.println(CLASS_NAME + ": No arg constructor was called. No factory passed in. Factory will be null.");
   }
 */
+/*
   public PizzaStore(SimplePizzaFactory factory) {
     this.factory = factory;
   }
-
+*/
   Pizza orderPizza(String type) {
     Pizza pizza;
 

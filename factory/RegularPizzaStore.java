@@ -1,4 +1,4 @@
-public class RegularPizzaStore extends PizzaStore {
+public class RegularPizzaStore extends AbstractPizzaStore {
   public static final String CLASS_NAME = "RegularPizzaStore";
 
   public RegularPizzaStore(SimplePizzaFactory factory) {

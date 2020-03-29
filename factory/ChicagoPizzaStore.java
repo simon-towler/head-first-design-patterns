@@ -1,9 +1,9 @@
-public class ChicagoPizzaStore extends PizzaStore {
+public class ChicagoPizzaStore extends AbstractPizzaStore {
   SimplePizzaFactory factory;//will be passed in from constructor
 
   //constructor
   public ChicagoPizzaStore(SimplePizzaFactory factory) {
-    this.factory = factory;
+    super.factory = factory;
   }
 
   public Pizza createPizza(String type) {
